@@ -2,10 +2,26 @@
   var octo = exports.octo = exports.octo || {};
 
   octo.octo = function(selector, params) {
-    var defaults = {};
+    var defaults = {
+      arms: 8,
+      segments: 15,
+      minLength: 10,
+      maxLength: 20
+    };
+    var options = extend({}, defaults, params);
 
     var root = d3.select(selector),
-        options = extend({}, defaults, params);
+        svg = root.append('svg');
+    
+    var setup = function() {
+        var octopus = svg.append("g")
+          .attr("class", "octo");
+
+        var arms = octopus.selectAll('g')
+          .data(d3.range(8).map(function(d) {return {}}))
+        .enter().append('g')
+          .attr("class", "arm")
+    }
         
   }
 
@@ -20,4 +36,4 @@
     return arguments[0];
   }
 
-})()
+})(this)
